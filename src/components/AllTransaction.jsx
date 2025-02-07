@@ -1,19 +1,13 @@
 import React from 'react';
-import { calculatePointsPerTransaction } from '../utils/helpers';
-import { toLocalDate } from '../utils/helpers';
-import { sortDataByDate } from '../utils/helpers';
-import { useApi } from '../services/api';
+import {
+  calculatePointsPerTransaction,
+  sortDataByDate,
+  toLocalDate,
+} from '../utils/helpers';
 
-function AllTransaction() {
-  const { data, loading, error } = useApi();
+function AllTransaction({ data }) {
   const sortedData = sortDataByDate(data);
 
-  if (error) {
-    return <h3>ErrorMessage: {error}</h3>;
-  }
-  if (loading) {
-    return <h3>Loading..</h3>;
-  }
   return (
     <>
       <h2>All Transactions</h2>

@@ -11,19 +11,7 @@ export function calculatePointsPerTransaction(data) {
   return points;
 }
 
-// filter data by specific date and month.
-export const filterDataByMonth = (data, month, year) => {
-  return data.filter((item) => {
-    const purchaseDate = new Date(item.purchaseDate);
-
-    return (
-      purchaseDate.getMonth() === month - 1 &&
-      purchaseDate.getFullYear() === year
-    );
-  });
-};
-
-// filter data by name and aggregate their value
+// Calculate total rewards
 export function filterDataByName(data) {
   const result = data.reduce((acc, obj) => {
     if (!acc[obj.customerName]) {
@@ -38,39 +26,53 @@ export function filterDataByName(data) {
   return aggregatedArray;
 }
 
+//responsible for convert date to local date format.
+export function toLocalDate(data) {
+  return new Date(data.purchaseDate).toLocaleDateString();
+}
+
 // Sort data by date
 export function sortDataByDate(userData) {
+  const cloneUserData = [...userData];
   const dateSort = (a, b) => {
     const dateA = new Date(a.purchaseDate);
     const dateB = new Date(b.purchaseDate);
     return dateA - dateB;
   };
-  return userData.sort(dateSort);
+  return cloneUserData.sort(dateSort);
 }
 
-// get Month and Year
-export const getMonthYear = (data) => {
-  const dates = data.map((item) => new Date(item.purchaseDate));
-  const maxDate = new Date(Math.max(...dates.map((date) => date.getTime())));
+// Aggregate monthly data
+export function aggregateMonthly(data) {
+  const result = data.reduce((acc, obj) => {
+    const dateObj = new Date(obj.purchaseDate);
+    const monthYear = dateObj.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric',
+    });
+    const transactionYear = dateObj.getFullYear();
+    const transactionDate = toLocalDate(obj);
+    if (!acc[monthYear]) {
+      acc[monthYear] = [];
+    }
 
-  const getMonthYearObject = (date, offset) => {
-    const newDate = new Date(date); // create a copy of the date
-    newDate.setMonth(date.getMonth() - offset); // adjust by offset months
-    return {
-      monthIndex: newDate.getMonth() + 1,
-      month: newDate.toLocaleString('default', { month: 'long' }),
-      year: newDate.getFullYear(),
-    };
-  };
+    acc[monthYear].push({
+      customerId: obj.customerId,
+      customerName: obj.customerName,
+      transactionId: obj.transactionId,
+      amount: obj.amount,
+      transactionDate,
+      transactionYear,
+      points: calculatePointsPerTransaction(obj),
+    });
+    return acc;
+  }, {});
 
-  return {
-    latest: getMonthYearObject(maxDate, 0),
-    secondlatest: getMonthYearObject(maxDate, 1),
-    thirdlatest: getMonthYearObject(maxDate, 2),
-  };
-};
-
-//responsible for convert date to local date format.
-export function toLocalDate(data) {
-  return new Date(data.purchaseDate).toLocaleDateString();
+  const aggregatedArray = Object.entries(result).map(
+    ([monthYear, transactions]) => ({
+      monthYear,
+      transactions,
+    })
+  );
+  return aggregatedArray;
 }

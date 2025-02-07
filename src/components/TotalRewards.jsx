@@ -1,17 +1,8 @@
 import React from 'react';
-import { useApi } from '../services/api';
 import { filterDataByName } from '../utils/helpers';
 
-const TotalRewards = () => {
-  const { data, loading, error } = useApi();
+const TotalRewards = ({ data }) => {
   const filteredData = filterDataByName(data);
-
-  if (error) {
-    return <h3>ErrorMessage : {error}</h3>;
-  }
-  if (loading) {
-    return <h3>Loading..</h3>;
-  }
 
   return (
     <>
