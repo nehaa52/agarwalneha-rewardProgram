@@ -1,13 +1,30 @@
+// Filter last 3 months data:
+
+export function getLatestDataMonth(data) {
+  const dates = data.map(item => new Date(item.purchaseDate));
+  const maxDate = new Date(Math.max(...dates.map(date => date.getTime())));
+  return maxDate;
+}
+
+export function filterLastThreeMonths(data) {
+  const latestDate = getLatestDataMonth(data);
+  const threeMonthsAgo = new Date(latestDate);
+  threeMonthsAgo.setMonth(latestDate.getMonth() - 2);
+
+  return data.filter(obj => {
+    const purchaseDate = new Date(obj.purchaseDate);
+    return purchaseDate >= threeMonthsAgo && purchaseDate <= latestDate;
+  });
+}
+
 // Calculate points for each transaction
 export function calculatePointsPerTransaction(data) {
   const price = Math.floor(data.amount);
-  let points = 0;
-  if (price > 100) {
-    points += 2 * (price - 100); // 2 points for every dollar over $100
-    points += 1 * 50; // 1 point for every dollar between $50 and $100
-  } else if (price > 50) {
-    points += 1 * (price - 50); // 1 point for every dollar between $50 and price
+  if (isNaN(price) || price === null || price === undefined) {
+    return 0;
   }
+  let points = 0;
+  price > 100 ? (points += (2 * (price - 100)) + 50) : ((price > 50) ? points += 1 * (price - 50) : 0);
   return points;
 }
 
@@ -63,7 +80,7 @@ export function aggregateMonthly(data) {
       amount: obj.amount,
       transactionDate,
       transactionYear,
-      points: calculatePointsPerTransaction(obj),
+      points: obj.points,
     });
     return acc;
   }, {});

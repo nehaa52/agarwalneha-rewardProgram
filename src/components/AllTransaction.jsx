@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  calculatePointsPerTransaction,
   sortDataByDate,
   toLocalDate,
 } from '../utils/helpers';
@@ -32,7 +31,7 @@ function AllTransaction({ data }) {
                 <td>{toLocalDate(data)}</td>
                 <td>{data.productPurchased}</td>
                 <td>${data.amount}</td>
-                <td>{calculatePointsPerTransaction(data)}</td>
+                <td>{data.points}</td>
               </tr>
             );
           })}

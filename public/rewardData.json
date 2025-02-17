@@ -78,5 +78,30 @@
     "purchaseDate": "2024-10-15",
     "productPurchased": "TV",
     "amount": 132.6
+  },
+  {
+    "transactionId": 11,
+    "customerId": 4,
+    "customerName": "Nikhil",
+    "purchaseDate": "2024-09-15",
+    "productPurchased": "TV",
+    "amount": 132.6
+  },
+  {
+    "transactionId": 12,
+    "customerId": 5,
+    "customerName": "Sonal",
+    "purchaseDate": "2024-08-25",
+    "productPurchased": "Mobile",
+    "amount": 176
+  },
+  {
+    "transactionId": 13,
+    "customerId": 6,
+    "customerName": "Kavita",
+    "purchaseDate": "2025-01-15",
+    "productPurchased": "TV",
+    "amount": 162
   }
+
 ]

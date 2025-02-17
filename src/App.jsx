@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLogger } from './utils/logger';
 import UsersMonthlyRewards from './components/UserMonthlyRewards';
 import TotalRewards from './components/TotalRewards';
+import {calculatePointsPerTransaction, filterLastThreeMonths} from './utils/helpers';
 import AllTransaction from './components/AllTransaction';
 import { fetchTransactions } from './services/api';
 import './App.css';
@@ -13,9 +14,15 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const finaldata = async () => {
+    const updatedData = async () => {
       try {
-        setData(await fetchTransactions());
+        const data = await fetchTransactions();
+        const lastThreeMonthsData = filterLastThreeMonths(data); 
+        const finalData = lastThreeMonthsData.map( data => ({
+          ...data,
+          points: calculatePointsPerTransaction(data)
+        }))// Adding the rewards points earned per transaction according to the price
+        setData(finalData);
         logger.info('App mounted');
       } catch (err) {
         setError(err.message);
@@ -24,7 +31,7 @@ export default function App() {
         setLoading(false);
       }
     };
-    finaldata();
+    updatedData();
   }, []);
 
   if (loading) return <h3>Loading..</h3>;
