@@ -28,8 +28,8 @@ Transaction id, Customer Id, Customer name, Transaction date, Product purchased,
 4. Test Case Run: npm run test
 
 **Screenshots:**
-![image](https://github.com/user-attachments/assets/fff54ef6-f822-4608-89cc-86816ede95e4)
-![image](https://github.com/user-attachments/assets/2aa09791-acd8-44db-b9a7-07d85e65849d)
+![image](https://github.com/user-attachments/assets/1f0ced95-9be8-40f2-8bac-ff64f52a7f3a)
+![image](https://github.com/user-attachments/assets/d5d7283c-93a0-4f0b-a037-bda12abd47f9)
 
 **Screenshot of test cases:**
 ![image](https://github.com/user-attachments/assets/39520068-055e-4989-8141-edad4ad40410)
