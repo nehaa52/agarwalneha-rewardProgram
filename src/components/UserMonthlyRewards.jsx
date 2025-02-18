@@ -8,39 +8,28 @@ function UsersMonthlyRewards({ data }) {
   return (
     <>
       <h2>User Monthly Rewards</h2>
-      {agregateMonthsData.map(({ monthYear, transactions }) => (
-        <div key={monthYear}>
-          <h3>{monthYear}</h3>
-          <table id="customers">
-            <thead>
-              <tr>
-                <th>Customer ID</th>
-                <th>Customer Name</th>
-                <th>Transaction ID</th>
-                <th>Price</th>
-                <th>Transaction Date</th>
-                <th>Transaction Year</th>
-                <th>Reward Points</th>
+      <table id="customers">
+        <thead>
+          <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Transaction Month</th>
+            <th>Reward Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {agregateMonthsData.map(({ monthYear, transactions }) =>
+            transactions.map((data) => (
+              <tr key={`${data.customerId} - ${monthYear}`}>
+                <td>{data.customerId}</td>
+                <td>{data.customerName}</td>
+                <td>{data.monthYear}</td>
+                <td>{data.totalPoints}</td>
               </tr>
-            </thead>
-            <tbody>
-              {transactions.map((data) => {
-                return (
-                  <tr key={data.transactionId}>
-                    <td>{data.customerId}</td>
-                    <td>{data.customerName}</td>
-                    <td>{data.transactionId}</td>
-                    <td>${data.amount}</td>
-                    <td>{data.transactionDate}</td>
-                    <td>{data.transactionYear}</td>
-                    <td>{data.points}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      ))}
+            ))
+          )}
+        </tbody>
+      </table>
     </>
   );
 }

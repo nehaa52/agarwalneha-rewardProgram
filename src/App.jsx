@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLogger } from './utils/logger';
 import UsersMonthlyRewards from './components/UserMonthlyRewards';
 import TotalRewards from './components/TotalRewards';
-import {calculatePointsPerTransaction, filterLastThreeMonths} from './utils/helpers';
+import { filterLastThreeMonths } from './utils/helpers';
 import AllTransaction from './components/AllTransaction';
 import { fetchTransactions } from './services/api';
 import './App.css';
@@ -17,12 +17,8 @@ export default function App() {
     const updatedData = async () => {
       try {
         const data = await fetchTransactions();
-        const lastThreeMonthsData = filterLastThreeMonths(data); 
-        const finalData = lastThreeMonthsData.map( data => ({
-          ...data,
-          points: calculatePointsPerTransaction(data)
-        }))// Adding the rewards points earned per transaction according to the price
-        setData(finalData);
+        const lastThreeMonthsData = filterLastThreeMonths(data);
+        setData(lastThreeMonthsData);
         logger.info('App mounted');
       } catch (err) {
         setError(err.message);
@@ -41,8 +37,14 @@ export default function App() {
 
   return (
     <>
-      <UsersMonthlyRewards data={data} />
-      <TotalRewards data={data} />
+      <div className='tables-container'>
+        <div className='table-wrapper'>
+          <UsersMonthlyRewards data={data} />
+        </div>
+        <div className='table-wrapper'>
+          <TotalRewards data={data} />
+        </div>
+      </div>
       <AllTransaction data={data} />
     </>
   );

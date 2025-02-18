@@ -11,12 +11,28 @@
     "transactionId": 2,
     "customerId": 1,
     "customerName": "Aman",
-    "purchaseDate": "2024-11-23",
+    "purchaseDate": "2024-11-03",
     "productPurchased": "Laptop",
     "amount": 180
   },
   {
     "transactionId": 3,
+    "customerId": 1,
+    "customerName": "Aman",
+    "purchaseDate": "2024-10-09",
+    "productPurchased": "Laptop",
+    "amount": 173
+  },
+  {
+    "transactionId": 4,
+    "customerId": 1,
+    "customerName": "Aman",
+    "purchaseDate": "2024-11-23",
+    "productPurchased": "Laptop",
+    "amount": 119
+  },
+  {
+    "transactionId": 5,
     "customerId": 2,
     "customerName": "Nidhi",
     "purchaseDate": "2024-11-05",
@@ -24,23 +40,23 @@
     "amount": 92.4
   },
   {
-    "transactionId": 4,
+    "transactionId": 6,
     "customerId": 2,
     "customerName": "Nidhi",
-    "purchaseDate": "2024-10-05",
+    "purchaseDate": "2024-10-15",
     "productPurchased": "Laptop",
     "amount": 140
   },
   {
-    "transactionId": 5,
+    "transactionId": 7,
     "customerId": 2,
     "customerName": "Nidhi",
-    "purchaseDate": "2024-12-05",
+    "purchaseDate": "2024-12-26",
     "productPurchased": "TV",
     "amount": 70
   },
   {
-    "transactionId": 6,
+    "transactionId": 8,
     "customerId": 3,
     "customerName": "Neha",
     "purchaseDate": "2024-10-27",
@@ -48,7 +64,7 @@
     "amount": 62.5
   },
   {
-    "transactionId": 7,
+    "transactionId": 9,
     "customerId": 3,
     "customerName": "Neha",
     "purchaseDate": "2024-11-15",
@@ -56,7 +72,15 @@
     "amount": 100
   },
   {
-    "transactionId": 8,
+    "transactionId": 10,
+    "customerId": 3,
+    "customerName": "Neha",
+    "purchaseDate": "2024-12-25",
+    "productPurchased": "Mobile",
+    "amount": 180.9
+  },
+  {
+    "transactionId": 11,
     "customerId": 4,
     "customerName": "Nikhil",
     "purchaseDate": "2024-11-08",
@@ -64,7 +88,7 @@
     "amount": 105
   },
   {
-    "transactionId": 9,
+    "transactionId": 12,
     "customerId": 4,
     "customerName": "Nikhil",
     "purchaseDate": "2024-12-23",
@@ -72,7 +96,7 @@
     "amount": 128
   },
   {
-    "transactionId": 10,
+    "transactionId": 13,
     "customerId": 4,
     "customerName": "Nikhil",
     "purchaseDate": "2024-10-15",
@@ -80,7 +104,7 @@
     "amount": 132.6
   },
   {
-    "transactionId": 11,
+    "transactionId": 14,
     "customerId": 4,
     "customerName": "Nikhil",
     "purchaseDate": "2024-09-15",
@@ -88,7 +112,7 @@
     "amount": 132.6
   },
   {
-    "transactionId": 12,
+    "transactionId": 15,
     "customerId": 5,
     "customerName": "Sonal",
     "purchaseDate": "2024-08-25",
@@ -96,12 +120,51 @@
     "amount": 176
   },
   {
-    "transactionId": 13,
+    "transactionId": 16,
+    "customerId": 5,
+    "customerName": "Sonal",
+    "purchaseDate": "2024-11-15",
+    "productPurchased": "Mobile",
+    "amount": 184.6
+  },
+  {
+    "transactionId": 17,
+    "customerId": 5,
+    "customerName": "Sonal",
+    "purchaseDate": "2024-10-29",
+    "productPurchased": "Mobile",
+    "amount": 176
+  },
+  {
+    "transactionId": 18,
     "customerId": 6,
     "customerName": "Kavita",
     "purchaseDate": "2025-01-15",
     "productPurchased": "TV",
     "amount": 162
+  },
+  {
+    "transactionId": 19,
+    "customerId": 6,
+    "customerName": "Kavita",
+    "purchaseDate": "2024-12-18",
+    "productPurchased": "Mobile",
+    "amount": 198
+  },
+  {
+    "transactionId": 20,
+    "customerId": 3,
+    "customerName": "Neha",
+    "purchaseDate": "2025-01-16",
+    "productPurchased": "TV",
+    "amount": 189
+  },
+  {
+    "transactionId": 21,
+    "customerId": 5,
+    "customerName": "Sonal",
+    "purchaseDate": "2025-01-15",
+    "productPurchased": "TV",
+    "amount": 134
   }
-
 ]

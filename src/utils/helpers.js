@@ -1,5 +1,15 @@
-// Filter last 3 months data:
+// Calculate points for each transaction
+export function calculatePointsPerTransaction(data) {
+  const price = Math.floor(data.amount);
+  if (isNaN(price) || price === null || price === undefined) {
+    return 0;
+  }
+  let points = 0;
+  price > 100 ? (points += (2 * (price - 100)) + 50) : ((price > 50) ? points += 1 * (price - 50) : 0);
+  return points;
+}
 
+// Filter last 3 months data:
 export function getLatestDataMonth(data) {
   const dates = data.map(item => new Date(item.purchaseDate));
   const maxDate = new Date(Math.max(...dates.map(date => date.getTime())));
@@ -10,22 +20,15 @@ export function filterLastThreeMonths(data) {
   const latestDate = getLatestDataMonth(data);
   const threeMonthsAgo = new Date(latestDate);
   threeMonthsAgo.setMonth(latestDate.getMonth() - 2);
-
-  return data.filter(obj => {
+  threeMonthsAgo.setDate('1');
+  const updatedData = data.filter(obj => {
     const purchaseDate = new Date(obj.purchaseDate);
     return purchaseDate >= threeMonthsAgo && purchaseDate <= latestDate;
   });
-}
-
-// Calculate points for each transaction
-export function calculatePointsPerTransaction(data) {
-  const price = Math.floor(data.amount);
-  if (isNaN(price) || price === null || price === undefined) {
-    return 0;
-  }
-  let points = 0;
-  price > 100 ? (points += (2 * (price - 100)) + 50) : ((price > 50) ? points += 1 * (price - 50) : 0);
-  return points;
+  return updatedData.map(data => ({
+    ...data,
+    points: calculatePointsPerTransaction(data)
+  }))// Adding the rewards points earned per transaction according to the price
 }
 
 // Calculate total rewards
@@ -64,31 +67,36 @@ export function aggregateMonthly(data) {
   const result = data.reduce((acc, obj) => {
     const dateObj = new Date(obj.purchaseDate);
     const monthYear = dateObj.toLocaleDateString('en-US', {
-      month: 'long',
+      month: 'short',
       year: 'numeric',
     });
     const transactionYear = dateObj.getFullYear();
-    const transactionDate = toLocalDate(obj);
+
     if (!acc[monthYear]) {
-      acc[monthYear] = [];
+      acc[monthYear] = {};
     }
 
-    acc[monthYear].push({
-      customerId: obj.customerId,
-      customerName: obj.customerName,
-      transactionId: obj.transactionId,
-      amount: obj.amount,
-      transactionDate,
-      transactionYear,
-      points: obj.points,
-    });
+    if (!acc[monthYear][obj.customerId]) {
+      acc[monthYear][obj.customerId] = {
+        customerId: obj.customerId,
+        customerName: obj.customerName,
+        monthYear,
+        transactionYear,
+        totalAmount: 0,
+        totalPoints: 0,
+      }
+    }
+
+    acc[monthYear][obj.customerId].totalAmount += obj.amount;
+    acc[monthYear][obj.customerId].totalPoints += obj.points;
+
     return acc;
   }, {});
 
   const aggregatedArray = Object.entries(result).map(
-    ([monthYear, transactions]) => ({
+    ([monthYear, customers]) => ({
       monthYear,
-      transactions,
+      transactions: Object.values(customers),
     })
   );
   return aggregatedArray;

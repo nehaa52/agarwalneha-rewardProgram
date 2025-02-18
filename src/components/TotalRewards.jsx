@@ -18,7 +18,7 @@ const TotalRewards = ({ data }) => {
         <tbody>
           {filteredData.map((data) => {
             return (
-              <tr key={data.transactionId}>
+              <tr key={data.customerName}>
                 <td>{data.customerName}</td>
                 <td>{data.price}</td>
               </tr>
