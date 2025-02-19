@@ -29,8 +29,16 @@ Transaction id, Customer Id, Customer name, Transaction date, Product purchased,
 
 **Screenshots:**
 ![image](https://github.com/user-attachments/assets/1f0ced95-9be8-40f2-8bac-ff64f52a7f3a)
-![image](https://github.com/user-attachments/assets/d5d7283c-93a0-4f0b-a037-bda12abd47f9)
 
 **Screenshot of test cases:**
-![image](https://github.com/user-attachments/assets/39520068-055e-4989-8141-edad4ad40410)
+
+![image](https://github.com/user-attachments/assets/c354b944-6e44-4b3b-81db-664e8f78d720)
+
+**Screenshot of error and loading state:**
+
+![image](https://github.com/user-attachments/assets/cdf6eb5e-ecd4-4506-9532-adcc76b830f2)
+
+![image](https://github.com/user-attachments/assets/d9c1c2ca-02e5-45bb-ac55-65251c9a50e9)
+
+
 
