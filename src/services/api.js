@@ -1,6 +1,4 @@
-import { useLogger } from '../utils/logger';
-
-export const fetchTransactions = async () => {
+export const fetchTransactions = async (logger) => {
   try {
     const response = await fetch('/rewardData.json');
     if (!response.ok) {
@@ -9,7 +7,7 @@ export const fetchTransactions = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    useLogger.error('Error fetching transactions:', error);
+    if (logger) logger.error(`${error.message}`);
     throw error;
   }
 };

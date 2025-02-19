@@ -8,7 +8,7 @@ import { fetchTransactions } from './services/api';
 import './App.css';
 
 export default function App() {
-  const { logs, logger } = useLogger();
+  const { logger } = useLogger();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,12 +16,12 @@ export default function App() {
   useEffect(() => {
     const updatedData = async () => {
       try {
-        const data = await fetchTransactions();
+        const data = await fetchTransactions(logger);
         const lastThreeMonthsData = filterLastThreeMonths(data);
         setData(lastThreeMonthsData);
-        logger.info('App mounted');
+        logger.info( 'App mounted' );
       } catch (err) {
-        setError(err.message);
+        setError( 'Error fetching transactions' );
         logger.error(err.message);
       } finally {
         setLoading(false);
@@ -32,8 +32,6 @@ export default function App() {
 
   if (loading) return <h3>Loading..</h3>;
   if (error) return <h3>ErrorMessage: {error}</h3>;
-
-  console.log(logs);
 
   return (
     <>

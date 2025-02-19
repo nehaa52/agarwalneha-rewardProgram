@@ -5,10 +5,14 @@ export const useLogger = () => {
 
   const logger = {
     info: (message) => {
-      setLogs((prevLogs) => [...prevLogs, `INFO: ${message}`]);
+      const logMessage = `INFO : ${message}`;
+      setLogs((prevLogs) => [...prevLogs, logMessage]);
+      console.log(logMessage);
     },
     error: (message) => {
-      setLogs((prevLogs) => [...prevLogs, `ERROR: ${message}`]);
+      const errorMessage = `ERROR: ${message}`;
+      setLogs((prevLogs) => [...prevLogs, errorMessage]);
+      console.error(errorMessage);
     },
   };
 
